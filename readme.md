@@ -1,4 +1,4 @@
-`ef4501i: computer graphics`
+`ef4504i: computer graphics`
 ============================
 ***this repository contains all my coursework during IF ITS fall 2024 computer graphics course***
 

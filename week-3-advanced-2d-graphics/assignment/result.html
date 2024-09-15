@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html>
+   <head>
+      <meta charset="UTF-8">
+      <title>TransformedShapes</title>
+      <style>
+         /* This style section is here to make the canvas more obvious on the
+         page.  It is white on a light gray page background, with a thin
+         black border. */
+         body {
+            background-color: #E8E8E8;
+         }
+         canvas {
+            background-color: white;
+            display: block;
+         }
+         #canvasholder {
+            border:2px solid black;
+            float: left; /* This makes the border exactly fit the canvas. */
+         }
+      </style>
+   </head>
+   <body> 
+      <h2>Computer Graphics Lab 1:  Transformed Shapes</h2>
+      <h2>5025221085 | Taib Izzat Samawi</h2>
+
+      <noscript>
+         <!-- This message will be shown in the page if JavaScript is not available. -->
+         <p>JavaScript is required to use this page.</p>
+      </noscript>
+
+      <div id="canvasholder">
+         <canvas id="canvas" width="565" height="400">
+            <!-- This message is shown on the page if the browser doesn't support the canvas element. -->
+         Canvas not supported.
+         </canvas>
+         <script>
+            var ctx = document.getElementById("canvas").getContext("2d");
+
+            // Function to draw rectangles
+            function drawRect(x, y, width, height, color, lineWidth = 1.0, globalAlpha = 1.0) {
+               ctx.beginPath();
+               ctx.globalAlpha = globalAlpha;
+               ctx.fillStyle = color;
+               ctx.lineWidth = lineWidth;
+               ctx.rect(x, y, width, height);
+               ctx.fill();
+            }
+
+            // Function to draw paths (triangles)
+            function drawPath(moveTo, lineTo1, lineTo2, closeTo, color, transform = null, lineWidth = 1.0, globalAlpha = 1.0) {
+               if (transform) ctx.save();
+   
+               ctx.beginPath();
+               if (transform) ctx.transform(...transform);
+               ctx.globalAlpha = globalAlpha;
+               ctx.fillStyle = color;
+               ctx.lineWidth = lineWidth;
+   
+               ctx.moveTo(...moveTo);
+               ctx.lineTo(...lineTo1);
+               ctx.lineTo(...lineTo2);
+               ctx.lineTo(...closeTo);
+               ctx.closePath();
+               ctx.fill();
+   
+               if (transform) ctx.restore();
+            }
+   
+           // Function to draw text
+            function drawText(text, x, y, font = "10px Arial", color = 'rgb(255, 255, 255)', transform = null, globalAlpha = 1.0) {
+               if (transform) ctx.save();
+   
+               if (transform) ctx.transform(...transform);
+               ctx.globalAlpha = globalAlpha;
+               ctx.fillStyle = color;
+               ctx.font = font;
+               ctx.fillText(text, x, y);
+   
+               if (transform) ctx.restore();
+            }
+
+            drawRect(102, 109, 363, 102, 'rgb(0, 0, 0)', 0.56);
+            drawRect(334, 132, 40, 34, 'rgb(255, 255, 255)', 0.63);
+            drawRect(397, 132, 45, 34, 'rgb(255, 255, 255)', 0.67);
+            drawRect(334, 189, 40, 34, 'rgb(255, 255, 255)', 0.63);
+            drawRect(397, 189, 45, 34, 'rgb(255, 255, 255)', 0.67);
+            drawRect(227, 68, 113, 143, 'rgb(0, 0, 0)', 0.5);
+            drawRect(125, 132, 40, 34, 'rgb(255, 255, 255)', 0.63);
+            drawRect(187, 132, 40, 34, 'rgb(255, 255, 255)', 0.63);
+            drawRect(125, 189, 40, 34, 'rgb(255, 255, 255)', 0.63);
+            drawRect(187, 189, 40, 34, 'rgb(255, 255, 255)', 0.63);
+            drawRect(0, 211, 567, 113, 'rgb(254, 0, 0)', 0.63);
+            drawRect(269, 149, 28, 57, 'rgb(255, 255, 255)', 0.63);
+           
+            ctx.save();
+            ctx.beginPath();
+            ctx.transform(2.73, 0, 0, 1.56, -23, -45);
+            ctx.globalAlpha = 1.0;
+            ctx.fillStyle = 'rgb(0, 0, 0)';
+            ctx.lineWidth = 0.26;
+            ctx.moveTo(133, 73);
+            ctx.lineTo(12, 73);
+            ctx.lineTo(91.5, 73);
+            ctx.lineTo(112, 37);
+            ctx.closePath();
+            ctx.fill();
+            ctx.restore();
+
+            ctx.beginPath();
+            ctx.globalAlpha = 1.0;
+            ctx.fillStyle = 'rgb(255, 255, 255)';
+            ctx.lineWidth = 0.665198;
+            ctx.moveTo(283, 44);
+            ctx.arc(283.5, 63.5, 19.5, 0.000000, 6.28318531 /* 2pi */, 1);
+            ctx.fill();
+
+            ctx.beginPath();
+            ctx.globalAlpha = 1.0;
+            ctx.fillStyle = 'rgb(255, 255, 255)';
+            ctx.lineWidth = 0.6;
+            ctx.arc(283, 149, 14, 0.000000, 6.28318531 /* 2pi */, 1);
+            ctx.fill();
+   
+            ctx.save();
+            ctx.transform(3.90000, 0, 0, 3.900000, 0, 0);
+            ctx.globalAlpha = 1.0;
+            ctx.fillStyle = 'rgb(255, 255, 255)';
+            ctx.font = "Arial 20px";
+            ctx.fillText("Computer Graphics Class 2024", 2.5, 72);
+            ctx.restore();
+            
+            /**
+             * The init() funciton is called after the page has been
+             * loaded.  It initializes the canvas and graphics variables,
+             * and it calls draw() to draw on the canvas.  If an error
+             * occurs, a message is displayed in place of the canvas.
+             */
+            function init() {
+               try {
+                  let canvas = document.getElementById("canvas");
+                  g = document.getElementById("canvas").getContext("2d");
+               } catch(e) {
+                  document.getElementById("canvasholder").innerHTML =
+                  "<p>Canvas graphics is not supported.<br>" +
+                  "An error occurred while initializing graphics.</p>";
+                  return;
+               }
+               draw();
+            }
+            
+            window.onload = init;
+         </script>
+      </div>
+   </body>
+</html>
